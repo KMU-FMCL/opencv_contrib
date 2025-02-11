@@ -35,22 +35,6 @@ struct cSpixelInfo {
   int num_pixels;
 };
 
-struct gSpixelInfo {
-  float lab[3];
-  float grad;
-  float pos[2];
-
-  explicit gSpixelInfo(unsigned char val = 0) : grad(val) {
-    lab[0] = lab[1] = lab[2] = val;
-    pos[0] = pos[1] = 0.0f;
-  }
-
-  gSpixelInfo() : grad(0) {
-    lab[0] = lab[1] = lab[2] = 0.0f;
-    pos[0] = pos[1] = 0.0f;
-  }
-};
-
 class cSLIC {
 private:
   cv::Mat image;
