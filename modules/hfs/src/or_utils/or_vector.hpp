@@ -21,6 +21,14 @@ template <class T> struct Vector2_ {
 
 template <class T> struct Vector4_ {
   T x, y, z, w;
+
+  __CV_CUDA_HOST_DEVICE__ Vector4_() : x(0), y(0), z(0), w(0) {}
+
+  __CV_CUDA_HOST_DEVICE__ explicit Vector4_(unsigned char val)
+      : x(val), y(val), z(val), w(val) {}
+
+  __CV_CUDA_HOST_DEVICE__ explicit Vector4_(float val)
+      : x(val), y(val), z(val), w(val) {}
 };
 
 template <class T> class Vector2 : public Vector2_<T> {
