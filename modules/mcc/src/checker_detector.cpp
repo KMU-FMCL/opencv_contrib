@@ -232,12 +232,9 @@ bool CCheckerDetectorImpl::
 #endif
                     for (Ptr<CChecker> checker : checkers)
                     {
-                        const std::vector<cv::Point2f>& checkerBox = checker->getBox();
-                        std::vector<cv::Point2f> restore_box(checkerBox.size());
-                        for (size_t a = 0; a < checkerBox.size(); ++a) {
-                            restore_box[a] = checkerBox[a] + static_cast<cv::Point2f>(region.tl());
-                        }
-                        checker->setBox(restore_box);
+                        for (cv::Point2f &corner : checker->getBox())
+                            corner += static_cast<cv::Point2f>(region.tl());
+
                         {
                             cv::AutoLock lock(mtx);
                             m_checkers.push_back(checker);
@@ -456,12 +453,9 @@ bool CCheckerDetectorImpl::
 #endif
                             for (Ptr<CChecker> checker : checkers)
                             {
-                                const std::vector<cv::Point2f>& checkerBox = checker->getBox();
-                                std::vector<cv::Point2f> restore_box(checkerBox.size());
-                                for (size_t a = 0; a < checkerBox.size(); ++a) {
-                                    restore_box[a] = checkerBox[a] + static_cast<cv::Point2f>(region.tl() + innerRegion.tl());
-                                }
-                                checker->setBox(restore_box);
+                                for (cv::Point2f &corner : checker->getBox())
+                                    corner += static_cast<cv::Point2f>(region.tl() + innerRegion.tl());
+
                                 {
                                     cv::AutoLock lock(mtx);
                                     m_checkers.push_back(checker);
