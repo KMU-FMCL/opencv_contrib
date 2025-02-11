@@ -94,6 +94,6 @@ static inline void checkNcvError(int err, const char *file, const int line,
 
 //! @endcond
 
-#endif
+#endif HAVE_CUDA
 
 #endif // OPENCV_CORE_CUDALEGACY_PRIVATE_HPP
