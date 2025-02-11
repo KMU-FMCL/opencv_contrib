@@ -78,8 +78,7 @@ public:
   }
 
   __CV_CUDA_HOST_DEVICE__ explicit Vector4(unsigned char val)
-      : Vector4_<T>(static_cast<T>(val), static_cast<T>(val),
-                    static_cast<T>(val), static_cast<T>(val)) {}
+      : Vector4_<T>(static_cast<T>(val)) {}
 
   __CV_CUDA_HOST_DEVICE__ friend Vector4<T> &operator/=(Vector4<T> &lhs, T d) {
     lhs.x /= d;
