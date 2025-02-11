@@ -824,7 +824,7 @@ public:
     ndc = (2 * f * n) / ndc;
   }
 
-  void update() { rWin->update() override; }
+  void update() override { rWin->update(); }
 
   void fixCameraYawAxis(bool useFixed, InputArray _up) CV_OVERRIDE {
     if (camman)
