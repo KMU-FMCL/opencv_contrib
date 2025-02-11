@@ -17,6 +17,13 @@ namespace orutils {
 
 template <class T> struct Vector2_ {
   T x, y;
+
+  __CV_CUDA_HOST_DEVICE__ Vector2_() : x(0), y(0) {}
+
+  __CV_CUDA_HOST_DEVICE__ explicit Vector2_(unsigned char val)
+      : x(val), y(val) {}
+
+  __CV_CUDA_HOST_DEVICE__ explicit Vector2_(float val) : x(val), y(val) {}
 };
 
 template <class T> struct Vector4_ {
@@ -45,8 +52,8 @@ public:
     this->y = v.y;
   }
 
-  // __CV_CUDA_HOST_DEVICE__ explicit Vector2(unsigned char val)
-  //     : Vector2_<T>(static_cast<T>(val)) {}
+  __CV_CUDA_HOST_DEVICE__ explicit Vector2(unsigned char val)
+      : Vector2_<T>(static_cast<T>(val)) {}
 
   __CV_CUDA_HOST_DEVICE__ friend Vector2<T> &operator/=(Vector2<T> &lhs, T d) {
     if (d == 0) {
