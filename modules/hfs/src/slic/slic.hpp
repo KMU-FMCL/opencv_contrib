@@ -71,6 +71,16 @@ struct gSpixelInfo {
   Vector4f color_info;
   int id;
   int num_pixels;
+
+  __CV_CUDA_HOST_DEVICE__ gSpixelInfo()
+      : center(0.0f 0.0f), color_info(0.0f, 0.0f, 0.0f, 0.0f), id(0),
+        num_pixels(0) {}
+
+  __CV_CUDA_HOST_DEVICE__ explicit gSpixelInfo(unsigned char val)
+      : center(static_cast<float>(val), static_cast<float>(val)),
+        color_info(static_cast<float>(val), static_cast<float>(val),
+                   static_cast<float>(val), static_cast<float>(val)),
+        id(0), num_pixels(0) {}
 };
 
 typedef orutils::Image<gSpixelInfo> gSpixelMap;
