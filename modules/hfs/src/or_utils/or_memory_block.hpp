@@ -10,6 +10,8 @@
 #endif
 
 #include "stddef.h"
+#include <algorithm>
+#include <type_traits>
 
 namespace cv {
 namespace hfs {
@@ -35,12 +37,26 @@ public:
   }
 
   void clear(unsigned char defaultValue = 0) {
-    for (size_t i = 0; i < dataSize; ++i) {
-      data_cpu[i] = T(defaultValue);
-    }
 #ifdef _HFS_CUDA_ON_
-    cudaSafeCall(cudaMemset(data_cuda, defaultValue, dataSize * sizeof(T)));
+    if constexpr (std::is_trivial_v<T>) {
+      cudaSafeCall(cudaMemset(data_cuda, defaultValue, dataSize * sizeof(T)));
+    } else {
+      T *tmp = new T[dataSize];
+      for (size_t i = 0; i < dataSize; ++i) {
+        tmp[i] = T(defaultValue);
+      }
+      cudaSafeCall(cudaMemcpy(data_cuda, tmp, dataSize * sizeof(T),
+                              cudaMemcpyHostToDevice));
+      delete[] tmp;
+    }
 #endif
+    if constexpr (std::is_trivial_v<T>) {
+      memset(data_cpu, defaultValue, dataSize * sizeof(T));
+    } else {
+      for (size_t i = 0; i < dataSize; ++i) {
+        data_cpu[i] = T(defaultValue);
+      }
+    }
   }
 
 #ifdef _HFS_CUDA_ON_
