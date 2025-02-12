@@ -66,7 +66,7 @@ public:
   virtual FormatInfo format() const = 0;
   virtual void updateFormat(const FormatInfo &videoFormat) = 0;
   virtual bool get([[maybe_unused]] const int propertyId,
-                   double &propertyVal) const {
+                   [[maybe_unused]] double &propertyVal) const {
     return false;
   }
   virtual int getFirstFrameIdx() const { return 0; }
