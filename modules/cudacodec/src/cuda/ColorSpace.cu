@@ -10,6 +10,16 @@ namespace cv {
 namespace cuda {
 namespace device {
 
+void SetMatYuv2Rgb(int iMatrix, bool fullRange);
+void Y8ToGray8(uint8_t *dpY8, int nY8Pitch, uint8_t *dpGray, int nGrayPitch,
+               int width, int height, bool bYUV444, cudaStream_t stream);
+void Y8ToGray16(uint8_t *dpY8, int nY8Pitch, uint8_t *dpGray, int nGrayPitch,
+                int width, int height, bool bYUV444, cudaStream_t stream);
+void Y16ToGray8(uint8_t *dpY16, int nY16Pitch, uint8_t *dpGray, int nGrayPitch,
+                int width, int height, bool bYUV444, cudaStream_t stream);
+void Y16ToGray16(uint8_t *dpY16, int nY16Pitch, uint8_t *dpGray, int nGrayPitch,
+                 int width, int height, bool bYUV444, cudaStream_t stream);
+
 __constant__ float matYuv2Color[3][3];
 
 void inline GetConstants(int iMatrix, float &wr, float &wb, int &black,
