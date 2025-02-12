@@ -103,11 +103,11 @@ void NvEncoder::CreateDefaultEncoderParams(
 #if (NVENCAPI_MAJOR_VERSION >= 12 && NVENCAPI_MINOR_VERSION >= 2)
   NV_ENC_PRESET_CONFIG presetConfig = {};
   presetConfig.version = NV_ENC_PRESET_CONFIG_VER;
-  presetConfig.config.version = NV_ENC_CONFIG_VER;
+  presetConfig.presetCfg.version = NV_ENC_CONFIG_VER;
 #else
   NV_ENC_PRESET_CONFIG presetConfig = {};
   presetConfig.version = NV_ENC_PRESET_CONFIG_VER;
-  presetConfig.config.version = NV_ENC_CONFIG_VER;
+  presetConfig.presetCfg.version = NV_ENC_CONFIG_VER;
 #endif
   m_nvenc.nvEncGetEncodePresetConfigEx(m_hEncoder, codecGuid, presetGuid,
                                        tuningInfo, &presetConfig);
@@ -226,11 +226,11 @@ void NvEncoder::CreateEncoder(const NV_ENC_INITIALIZE_PARAMS *pEncoderParams) {
 #if (NVENCAPI_MAJOR_VERSION >= 12 && NVENCAPI_MINOR_VERSION >= 2)
     NV_ENC_PRESET_CONFIG presetConfig = {};
     presetConfig.version = NV_ENC_PRESET_CONFIG_VER;
-    presetConfig.config.version = NV_ENC_CONFIG_VER;
+    presetConfig.presetCfg.version = NV_ENC_CONFIG_VER;
 #else
     NV_ENC_PRESET_CONFIG presetConfig = {};
     presetConfig.version = NV_ENC_PRESET_CONFIG_VER;
-    presetConfig.config.version = NV_ENC_CONFIG_VER;
+    presetConfig.presetCfg.version = NV_ENC_CONFIG_VER;
 #endif
     m_nvenc.nvEncGetEncodePresetConfigEx(
         m_hEncoder, pEncoderParams->encodeGUID, pEncoderParams->presetGUID,
