@@ -421,6 +421,10 @@ void icvFindMaximaInLayer_gpu(const PtrStepSz<unsigned int> &maskSum,
         mask, det, trace, maxPosBuffer, maxCounter);
   } else {
     Mask<false> mask;
+    if constexpr (!std::is_same_v<decltype(mask.tex), std::nullptr_t> &&
+                  !std::is_same_v<decltype(mask.tex), const std::nullptr_t>) {
+      mask.tex = cv::cudev::TexturePtr<unsigned int>();
+    }
     icvFindMaximaInLayer<<<grid, threads, smem_size>>>(
         mask, det, trace, maxPosBuffer, maxCounter);
   }
