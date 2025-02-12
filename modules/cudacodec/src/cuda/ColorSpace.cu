@@ -253,9 +253,9 @@ __global__ static void Yuv444ToColorKernel(uint8_t *pYuv, int nYuvPitch,
     Color ColorArray[2];
   };
   ColorOutx2 out;
-  out.Color[0] =
+  out.ColorArray[0] =
       YuvToColorForPixel<Color>(l0.x, ch1.x, ch2.x, videoFullRangeFlag);
-  out.Color[1] =
+  out.ColorArray[1] =
       YuvToColorForPixel<Color>(l0.y, ch1.y, ch2.y, videoFullRangeFlag);
   *(Colorx2 *)pDst = out.d;
 }
